@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dra. Nancy Ostrizniuk · Centro de Estética Avanzada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rosa:       #FFB6D9;
+  --rosa-light: #FFD6EC;
+  --rosa-pale:  #FFF0F7;
+  --rosa-mid:   #F590C4;
+  --dorado:     #D4AF37;
+  --dorado-light:#E8D080;
+  --dorado-pale: #FBF6E3;
+  --negro:      #1A1A1A;
+  --negro-mid:  #2E2E2E;
+  --gris:       #6B6B6B;
+  --gris-light: #A8A8A8;
+  --blanco:     #FFFFFF;
+  --crema:      #FDFAF6;
+  --borde:      #F0EBE3;
+  --mont: 'Montserrat', sans-serif;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--mont); background: var(--blanco); color: var(--negro); line-height: 1.65; overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 6vw;
+  background: rgba(255,255,255,0.94); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--borde);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 20px rgba(26,26,26,0.06); }
+.nav-brand { font-family: var(--mont); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--negro); text-decoration: none; }
+.nav-brand span { display: block; font-size: 0.6rem; font-weight: 300; letter-spacing: 0.22em; color: var(--dorado); margin-top: 2px; text-transform: uppercase; }
+.nav-links { display: flex; gap: 2.25rem; list-style: none; }
+.nav-links a { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gris); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--negro); }
+.nav-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--negro); color: var(--blanco); font-family: var(--mont); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; padding: 0.65rem 1.4rem; transition: background 0.2s, transform 0.15s; }
+.nav-cta:hover { background: var(--negro-mid); transform: translateY(-1px); }
+
+/* HERO */
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 0.9fr; padding-top: 5rem; position: relative; overflow: hidden; background: var(--crema); }
+.hero::before { content: ''; position: absolute; top: -120px; right: -120px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(255,182,217,0.18) 0%, transparent 70%); pointer-events: none; }
+.hero::after { content: ''; position: absolute; bottom: -80px; left: 15%; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%); pointer-events: none; }
+.hero-left { display: flex; flex-direction: column; justify-content: center; padding: 5rem 4vw 5rem 8vw; position: relative; z-index: 2; }
+.hero-tag { display: inline-flex; align-items: center; gap: 0.65rem; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dorado); margin-bottom: 2rem; }
+.hero-tag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--dorado); flex-shrink: 0; }
+.hero-title { font-family: var(--mont); font-size: clamp(2.6rem, 4.5vw, 4rem); font-weight: 300; line-height: 1.08; color: var(--negro); margin-bottom: 0.6rem; letter-spacing: -0.01em; }
+.hero-title strong { font-weight: 600; display: block; }
+.hero-name { font-family: var(--serif); font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 400; font-style: italic; color: var(--rosa-mid); margin-bottom: 2rem; letter-spacing: 0.02em; }
+.hero-divider { width: 48px; height: 1.5px; background: var(--dorado); margin-bottom: 1.75rem; }
+.hero-desc { font-size: 0.88rem; font-weight: 300; color: var(--gris); max-width: 420px; line-height: 1.9; margin-bottom: 2.5rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.btn-primary { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--rosa); color: var(--negro); font-family: var(--mont); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; padding: 0.95rem 1.75rem; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; }
+.btn-primary:hover { background: var(--rosa-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,182,217,0.45); }
+.btn-outline { display: inline-flex; align-items: center; gap: 0.6rem; background: transparent; color: var(--negro); font-family: var(--mont); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none; padding: 0.95rem 1.75rem; border: 1.5px solid var(--negro); transition: background 0.2s, color 0.2s; }
+.btn-outline:hover { background: var(--negro); color: var(--blanco); }
+.hero-stats { display: flex; gap: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--borde); }
+.hero-stat-num { font-family: var(--mont); font-size: 1.8rem; font-weight: 300; color: var(--dorado); display: block; line-height: 1; }
+.hero-stat-label { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gris-light); display: block; margin-top: 0.4rem; }
+
+/* Hero right */
+.hero-right { position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--rosa-pale); }
+.hero-photo-frame { position: relative; z-index: 2; width: 68%; max-width: 360px; aspect-ratio: 3/4; }
+.hero-photo-inner { width: 100%; height: 100%; background: linear-gradient(160deg, var(--rosa-light) 0%, var(--rosa-pale) 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(255,182,217,0.5); gap: 0.75rem; }
+.monogram { font-family: var(--serif); font-size: 7rem; font-weight: 300; color: rgba(255,182,217,0.55); line-height: 1; letter-spacing: -0.04em; }
+.monogram-label { font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--rosa-mid); font-family: var(--mont); font-weight: 500; }
+.frame-tl, .frame-br { position: absolute; width: 28px; height: 28px; }
+.frame-tl { top: -8px; left: -8px; border-top: 2px solid var(--dorado); border-left: 2px solid var(--dorado); }
+.frame-br { bottom: -8px; right: -8px; border-bottom: 2px solid var(--dorado); border-right: 2px solid var(--dorado); }
+.hero-badge { position: absolute; bottom: 10%; left: 5%; background: var(--blanco); border: 1px solid var(--borde); padding: 1rem 1.25rem; z-index: 4; box-shadow: 0 8px 32px rgba(26,26,26,0.08); }
+.hero-badge-gold { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dorado); font-weight: 600; margin-bottom: 0.3rem; display: block; }
+.hero-badge-text { font-family: var(--serif); font-size: 0.95rem; font-style: italic; color: var(--negro); }
+
+/* SECTION COMMONS */
+.section-eyebrow { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dorado); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; }
+.section-eyebrow::before { content: ''; display: inline-block; width: 28px; height: 1.5px; background: var(--dorado); }
+
+/* CREDENCIALES */
+.credenciales { padding: 6.5rem 8vw; background: var(--blanco); border-top: 1px solid var(--borde); }
+.cred-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 5rem; align-items: start; margin-top: 2.5rem; }
+.cred-headline { font-family: var(--mont); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.12; color: var(--negro); }
+.cred-headline strong { font-weight: 600; display: block; }
+.cred-quote { font-family: var(--serif); font-size: 1.05rem; font-style: italic; font-weight: 300; color: var(--gris); line-height: 1.7; border-left: 2px solid var(--rosa); padding-left: 1.25rem; margin-top: 2rem; }
+.cred-items { display: flex; flex-direction: column; gap: 0.85rem; }
+.cred-item { display: flex; align-items: flex-start; gap: 1.1rem; padding: 1.1rem 1.25rem; border: 1px solid var(--borde); background: var(--crema); transition: border-color 0.2s, transform 0.15s; }
+.cred-item:hover { border-color: var(--rosa); transform: translateX(4px); }
+.cred-icon { width: 38px; height: 38px; flex-shrink: 0; background: var(--rosa-pale); border: 1px solid var(--rosa-light); display: flex; align-items: center; justify-content: center; color: var(--rosa-mid); }
+.cred-title { font-size: 0.8rem; font-weight: 600; color: var(--negro); display: block; margin-bottom: 0.2rem; }
+.cred-sub { font-size: 0.72rem; color: var(--gris-light); display: block; font-weight: 300; }
+
+/* SERVICIOS */
+.servicios { padding: 6.5rem 8vw; background: var(--negro); }
+.servicios-header { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: end; margin-bottom: 3.5rem; }
+.servicios-title { font-family: var(--mont); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.12; color: var(--blanco); }
+.servicios-title strong { font-weight: 600; display: block; }
+.servicios-title em { font-family: var(--serif); font-style: italic; color: var(--rosa); font-weight: 300; }
+.servicios-intro { font-size: 0.83rem; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.85; }
+.servicios-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.06); }
+.serv-card { background: var(--negro-mid); padding: 2.25rem 2rem; display: flex; flex-direction: column; gap: 0.85rem; transition: background 0.2s; position: relative; overflow: hidden; }
+.serv-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--rosa); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+.serv-card:hover { background: #252525; }
+.serv-card:hover::before { transform: scaleX(1); }
+.serv-num { font-family: var(--mont); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.22em; color: var(--dorado); text-transform: uppercase; }
+.serv-name { font-family: var(--mont); font-size: 0.95rem; font-weight: 600; color: var(--blanco); line-height: 1.3; }
+.serv-desc { font-size: 0.76rem; font-weight: 300; color: rgba(255,255,255,0.45); line-height: 1.75; flex: 1; }
+.serv-tag { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rosa); font-weight: 500; margin-top: 0.25rem; display: flex; align-items: center; gap: 0.4rem; }
+.serv-tag::before { content: ''; width: 16px; height: 1px; background: var(--rosa); }
+
+/* TESTIMONIOS */
+.testimonios { padding: 6.5rem 8vw; background: var(--crema); border-top: 1px solid var(--borde); }
+.test-header { text-align: center; margin-bottom: 4rem; }
+.test-title { font-family: var(--mont); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; color: var(--negro); margin-top: 1rem; line-height: 1.12; }
+.test-title strong { font-weight: 600; display: block; }
+.test-title em { font-family: var(--serif); font-style: italic; color: var(--rosa-mid); font-weight: 300; }
+.test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 3rem; }
+.test-card { background: var(--blanco); border: 1px solid var(--borde); padding: 1.75rem; display: flex; flex-direction: column; gap: 1.1rem; transition: box-shadow 0.2s, transform 0.2s; }
+.test-card:hover { box-shadow: 0 8px 32px rgba(255,182,217,0.18); transform: translateY(-3px); }
+.stars { display: flex; gap: 3px; }
+.star { width: 13px; height: 13px; fill: var(--dorado); }
+.test-text { font-family: var(--serif); font-size: 1rem; font-style: italic; font-weight: 300; color: var(--negro-mid); line-height: 1.75; flex: 1; }
+.test-text::before { content: '\201C'; font-size: 1.5rem; color: var(--rosa); line-height: 0; vertical-align: -0.4rem; margin-right: 0.15rem; }
+.test-text::after  { content: '\201D'; font-size: 1.5rem; color: var(--rosa); line-height: 0; vertical-align: -0.4rem; margin-left: 0.15rem; }
+.test-author { display: flex; align-items: center; gap: 0.85rem; padding-top: 1rem; border-top: 1px solid var(--borde); }
+.test-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--rosa-pale); border: 1.5px solid var(--rosa-light); display: flex; align-items: center; justify-content: center; font-family: var(--mont); font-size: 0.7rem; font-weight: 600; color: var(--rosa-mid); flex-shrink: 0; }
+.test-name { font-size: 0.78rem; font-weight: 600; color: var(--negro); display: block; }
+.test-detail { font-size: 0.68rem; color: var(--gris-light); display: block; margin-top: 0.15rem; font-weight: 300; }
+.rating-bar { display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; padding: 2rem 2.5rem; background: var(--blanco); border: 1px solid var(--borde); max-width: 600px; margin: 0 auto; }
+.rating-num { font-family: var(--mont); font-size: 3rem; font-weight: 300; color: var(--negro); line-height: 1; }
+.rating-right { display: flex; flex-direction: column; gap: 0.4rem; }
+.rating-stars-row { display: flex; gap: 3px; }
+.rating-count { font-size: 0.68rem; color: var(--gris-light); letter-spacing: 0.06em; }
+.google-link { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; color: var(--gris); text-decoration: none; border-bottom: 1px solid var(--borde); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+.google-link:hover { color: var(--negro); border-color: var(--dorado); }
+.g-dots { display: flex; gap: 3px; }
+.g-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+/* CONTACTO */
+.contacto { padding: 6.5rem 8vw; background: var(--blanco); border-top: 1px solid var(--borde); }
+.contacto-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; margin-top: 2.5rem; }
+.contacto-title { font-family: var(--mont); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; line-height: 1.12; color: var(--negro); margin-bottom: 2.25rem; }
+.contacto-title strong { font-weight: 600; display: block; }
+.info-list { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2.5rem; }
+.info-item { display: flex; align-items: flex-start; gap: 1.1rem; }
+.info-ico { width: 36px; height: 36px; flex-shrink: 0; background: var(--rosa-pale); border: 1px solid var(--rosa-light); display: flex; align-items: center; justify-content: center; margin-top: 2px; color: var(--rosa-mid); }
+.info-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dorado); font-weight: 600; display: block; margin-bottom: 0.25rem; }
+.info-value { font-size: 0.85rem; color: var(--negro-mid); font-weight: 300; line-height: 1.55; }
+.wa-btn { display: inline-flex; align-items: center; gap: 0.75rem; background: #25D366; color: var(--blanco); font-family: var(--mont); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 1rem 1.75rem; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; }
+.wa-btn:hover { background: #20BA5A; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.3); }
+.map-wrap { height: 380px; border: 1px solid var(--borde); background: var(--crema); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.map-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+.map-placeholder-inner { text-align: center; padding: 2rem; }
+.map-pin { width: 48px; height: 48px; background: var(--rosa-pale); border: 1px solid var(--rosa-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; color: var(--rosa-mid); }
+.map-p-title { font-family: var(--mont); font-size: 0.9rem; font-weight: 600; color: var(--negro); margin-bottom: 0.5rem; }
+.map-p-addr { font-size: 0.78rem; color: var(--gris); line-height: 1.65; font-weight: 300; }
+.map-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.1rem; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--dorado); text-decoration: none; transition: opacity 0.2s; }
+.map-link:hover { opacity: 0.75; }
+
+/* FOOTER */
+footer { background: var(--negro); padding: 2.5rem 8vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; border-top: 3px solid var(--rosa); }
+.footer-brand { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blanco); }
+.footer-brand span { display: block; font-size: 0.58rem; font-weight: 300; color: rgba(255,255,255,0.4); letter-spacing: 0.16em; margin-top: 0.3rem; }
+.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links a { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); text-decoration: none; font-weight: 300; transition: color 0.2s; }
+.footer-links a:hover { color: var(--rosa); }
+.footer-copy { font-size: 0.6rem; color: rgba(255,255,255,0.25); font-weight: 300; letter-spacing: 0.06em; }
+
+/* WA FLOTANTE */
+.wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 200; display: flex; align-items: center; gap: 0.7rem; background: #25D366; color: var(--blanco); font-family: var(--mont); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.85rem 1.4rem; border-radius: 50px; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.2s, box-shadow 0.2s; }
+.wa-float:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37,211,102,0.5); }
+
+/* ANIMACIONES */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+.hero-tag     { animation: fadeUp 0.7s ease both; animation-delay: 0.05s; }
+.hero-title   { animation: fadeUp 0.7s ease both; animation-delay: 0.15s; }
+.hero-name    { animation: fadeUp 0.7s ease both; animation-delay: 0.25s; }
+.hero-divider { animation: fadeUp 0.7s ease both; animation-delay: 0.3s; }
+.hero-desc    { animation: fadeUp 0.7s ease both; animation-delay: 0.38s; }
+.hero-actions { animation: fadeUp 0.7s ease both; animation-delay: 0.46s; }
+.hero-stats   { animation: fadeUp 0.7s ease both; animation-delay: 0.54s; }
+.hero-right   { animation: fadeUp 0.9s ease both; animation-delay: 0.2s; }
+.hero-badge   { animation: fadeUp 0.7s ease both; animation-delay: 0.5s; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { display: none; }
+  .hero-left { padding: 7rem 6vw 4rem; }
+  .cred-grid, .servicios-header, .contacto-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .servicios-grid, .test-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+  footer { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a class="nav-brand" href="#">Dra. Nancy Ostrizniuk<span>Estética Avanzada · Santo Tomé</span></a>
+  <ul class="nav-links">
+    <li><a href="#credenciales">Perfil</a></li>
+    <li><a href="#servicios">Tratamientos</a></li>
+    <li><a href="#testimonios">Reseñas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a class="nav-cta" href="https://wa.me/+543722000000?text=Hola%20Dra.%20Ostrizniuk%2C%20quisiera%20consultar%20sobre%20un%20turno." target="_blank">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    Reservar turno
+  </a>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag"><span class="hero-tag-dot"></span>Santo Tomé · Corrientes · Argentina</p>
+    <h1 class="hero-title">Medicina<br><strong>Estética</strong><br>Avanzada</h1>
+    <p class="hero-name">Dra. Nancy Ostrizniuk</p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">Tratamientos no quirúrgicos de alto impacto, diseñados con criterio médico y orientados a resultados naturales. Cada intervención parte de un diagnóstico personalizado y una mirada integral del bienestar.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://wa.me/+543722000000?text=Hola%20Dra.%2C%20quisiera%20pedir%20turno." target="_blank">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Pedir turno por WhatsApp
+      </a>
+      <a class="btn-outline" href="#servicios">Ver tratamientos</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="hero-stat-num">+10</span><span class="hero-stat-label">Años de ejercicio</span></div>
+      <div><span class="hero-stat-num">Médica</span><span class="hero-stat-label">Especializada</span></div>
+      <div><span class="hero-stat-num">100%</span><span class="hero-stat-label">No quirúrgico</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-frame">
+      <div class="hero-photo-inner">
+        <span class="monogram">NO</span>
+        <span class="monogram-label">Foto profesional</span>
+      </div>
+      <div class="frame-tl"></div>
+      <div class="frame-br"></div>
+    </div>
+    <div class="hero-badge">
+      <span class="hero-badge-gold">Médica especialista</span>
+      <span class="hero-badge-text">Matrícula provincial vigente</span>
+    </div>
+  </div>
+</section>
+
+<section class="credenciales" id="credenciales">
+  <p class="section-eyebrow">Formación &amp; trayectoria</p>
+  <div class="cred-grid">
+    <div>
+      <h2 class="cred-headline">Respaldo médico<br><strong>verificable.</strong></h2>
+      <p class="cred-quote">La seguridad de un tratamiento estético no está solo en la técnica — está en la formación de quien lo ejecuta.</p>
+    </div>
+    <div class="cred-items">
+      <div class="cred-item">
+        <div class="cred-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div><span class="cred-title">Médica especialista en Medicina Estética</span><span class="cred-sub">Título habilitante · matrícula provincial vigente</span></div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div><span class="cred-title">Más de 10 años de ejercicio profesional</span><span class="cred-sub">Santo Tomé, Corrientes · atención personalizada</span></div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg></div>
+        <div><span class="cred-title">Actualización continua en técnicas avanzadas</span><span class="cred-sub">Rellenos dérmicos · toxina botulínica · bioestimuladores</span></div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg></div>
+        <div><span class="cred-title">Consultorio equipado con tecnología actual</span><span class="cred-sub">Radiofrecuencia · protocolos de seguridad estrictos</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="servicios" id="servicios">
+  <div class="servicios-header">
+    <div>
+      <p class="section-eyebrow" style="color:var(--rosa);"><span style="display:inline-block;width:28px;height:1.5px;background:var(--rosa);margin-right:0.75rem;vertical-align:middle;"></span>Tratamientos</p>
+      <h2 class="servicios-title">Estética médica<br><strong>sin</strong> <em>bisturí</em></h2>
+    </div>
+    <p class="servicios-intro">Todos los tratamientos se realizan en consultorio, bajo protocolo médico y con productos certificados. Cada plan se diseña después de una consulta diagnóstica donde se evalúan objetivos, historia clínica y expectativas.</p>
+  </div>
+  <div class="servicios-grid">
+    <div class="serv-card"><span class="serv-num">01</span><span class="serv-name">Toxina Botulínica</span><p class="serv-desc">Reducción de arrugas dinámicas en frente, entrecejo y patas de gallo. Resultados naturales, sin efecto congelado. Duración promedio 4–6 meses.</p><span class="serv-tag">Facial</span></div>
+    <div class="serv-card"><span class="serv-num">02</span><span class="serv-name">Rellenos con Ácido Hialurónico</span><p class="serv-desc">Restauración de volúmenes faciales, definición de labios, corrección de ojeras y surcos. Técnica de armonización que respeta la anatomía individual.</p><span class="serv-tag">Facial</span></div>
+    <div class="serv-card"><span class="serv-num">03</span><span class="serv-name">Bioestimuladores de Colágeno</span><p class="serv-desc">Tratamiento regenerativo que activa la producción natural de colágeno. Indicado para flacidez incipiente y pérdida de calidad cutánea. Resultados progresivos y duraderos.</p><span class="serv-tag">Facial · Corporal</span></div>
+    <div class="serv-card"><span class="serv-num">04</span><span class="serv-name">Radiofrecuencia</span><p class="serv-desc">Tecnología no invasiva para tensado facial y corporal, reducción de celulitis y mejora de la textura cutánea. Sin tiempo de recuperación.</p><span class="serv-tag">Facial · Corporal</span></div>
+    <div class="serv-card"><span class="serv-num">05</span><span class="serv-name">Mesoterapia Facial y Corporal</span><p class="serv-desc">Microinyecciones de complejos vitamínicos, ácido hialurónico o activos específicos según el objetivo: hidratación, luminosidad, caída de cabello o reducción de medidas.</p><span class="serv-tag">Facial · Capilar · Corporal</span></div>
+    <div class="serv-card"><span class="serv-num">06</span><span class="serv-name">Consulta y Plan Personalizado</span><p class="serv-desc">Evaluación diagnóstica completa del rostro y cuerpo. Protocolo adaptado a objetivos reales, presupuesto y estilo de vida. Siempre como primer paso.</p><span class="serv-tag">Diagnóstico</span></div>
+  </div>
+</section>
+
+<section class="testimonios" id="testimonios">
+  <div class="test-header">
+    <p class="section-eyebrow" style="justify-content:center;">Reseñas verificadas</p>
+    <h2 class="test-title">Lo que dicen<br><strong>las</strong> <em>pacientes</em></h2>
+  </div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="stars"><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+      <p class="test-text">Me hice el botox con mucho miedo de quedar con cara de plástico. El resultado fue completamente natural. La doctora me explicó cada paso y respetó lo que yo quería. Voy a seguir yendo.</p>
+      <div class="test-author"><div class="test-avatar">MG</div><div><span class="test-name">María G.</span><span class="test-detail">Toxina botulínica · Santo Tomé</span></div></div>
+    </div>
+    <div class="test-card">
+      <div class="stars"><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+      <p class="test-text">Llegué con muchas dudas sobre los rellenos y la Dra. me dio toda la información antes de decidir. Profesional, honesta y con muy buen ojo estético. Los resultados superaron mis expectativas.</p>
+      <div class="test-author"><div class="test-avatar">LR</div><div><span class="test-name">Laura R.</span><span class="test-detail">Rellenos faciales · Corrientes Capital</span></div></div>
+    </div>
+    <div class="test-card">
+      <div class="stars"><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+      <p class="test-text">Lo que más valoro es que nunca sentí presión para hacerme más de lo que necesitaba. El diagnóstico fue muy honesto y el plan que armamos juntas fue gradual. Exactamente lo que buscaba.</p>
+      <div class="test-author"><div class="test-avatar">VP</div><div><span class="test-name">Valeria P.</span><span class="test-detail">Mesoterapia y radiofrecuencia · Santo Tomé</span></div></div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:center;">
+    <div class="rating-bar">
+      <span class="rating-num">5.0</span>
+      <div class="rating-right">
+        <div class="rating-stars-row"><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <span class="rating-count">Reseñas verificadas en Google</span>
+      </div>
+      <a class="google-link" href="#" target="_blank"><span class="g-dots"><span class="g-dot" style="background:#EA4335;"></span><span class="g-dot" style="background:#FBBC05;"></span><span class="g-dot" style="background:#34A853;"></span><span class="g-dot" style="background:#4285F4;"></span></span>Ver en Google</a>
+    </div>
+  </div>
+</section>
+
+<section class="contacto" id="contacto">
+  <p class="section-eyebrow">Ubicación &amp; contacto</p>
+  <div class="contacto-grid">
+    <div>
+      <h2 class="contacto-title">Reservá tu<br><strong>consulta</strong></h2>
+      <div class="info-list">
+        <div class="info-item">
+          <div class="info-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><span class="info-label">Dirección</span><span class="info-value">Santo Tomé, Corrientes<br><span style="font-size:0.75rem;color:var(--gris-light);">[Dirección completa a completar]</span></span></div>
+        </div>
+        <div class="info-item">
+          <div class="info-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          <div><span class="info-label">Horario</span><span class="info-value">Lunes a viernes · Turnos programados<br><span style="font-size:0.75rem;color:var(--gris-light);">Agendá por WhatsApp en cualquier momento</span></span></div>
+        </div>
+        <div class="info-item">
+          <div class="info-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg></div>
+          <div><span class="info-label">WhatsApp</span><span class="info-value">Respuesta en el día · Turnos y consultas</span></div>
+        </div>
+      </div>
+      <a class="wa-btn" href="https://wa.me/+543722000000?text=Hola%20Dra.%20Ostrizniuk%2C%20quisiera%20pedir%20turno." target="_blank">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </div>
+    <div class="map-wrap">
+      <!-- REEMPLAZAR: <iframe src="https://www.google.com/maps/embed?pb=TU_URL" allowfullscreen loading="lazy"></iframe> -->
+      <div class="map-placeholder-inner">
+        <div class="map-pin"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <p class="map-p-title">Centro de Estética Avanzada</p>
+        <p class="map-p-addr">Dra. Nancy Ostrizniuk<br>Santo Tomé, Corrientes, Argentina</p>
+        <a class="map-link" href="https://maps.google.com/?q=Santo+Tome+Corrientes+Argentina" target="_blank">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver en Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Dra. Nancy Ostrizniuk<span>Centro de Estética Avanzada · Santo Tomé, Corrientes</span></div>
+  <ul class="footer-links">
+    <li><a href="#credenciales">Perfil</a></li>
+    <li><a href="#servicios">Tratamientos</a></li>
+    <li><a href="#testimonios">Reseñas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <p class="footer-copy">© 2025 · Todos los derechos reservados</p>
+</footer>
+
+<a class="wa-float" href="https://wa.me/+543722000000?text=Hola%20Dra.%20Ostrizniuk%2C%20quisiera%20consultar." target="_blank">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  Turno por WhatsApp
+</a>
+
+<script>
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 30); });
+</script>
+</body>
+</html>

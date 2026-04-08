@@ -1,0 +1,41 @@
+Puntos Clave de la Entrevista
+Gestión de Turnos y Pacientes
+
+Flexibilidad absoluta: La Dra. Nancy atiende a unos 6 o 7 pacientes diarios en bloques de 30 a 45 minutos. Sin embargo, sus horarios no son rígidos porque debe acomodarse a imprevistos personales, viajes y guardias en el hospital.
+
+Rechazo a la autogestión de turnos: Se opone rotundamente a que los pacientes reserven sus propios turnos de manera online, ya que perdería el control sobre su agenda y la flexibilidad que necesita.
+
+Transición de enfoque: Su objetivo a futuro es volcarse completamente a la medicina estética. Aunque mantendrá a sus pacientes clínicos actuales, no está aceptando pacientes nuevos en esa área.
+
+Manejo de Datos e Historial Médico
+
+Sistema actual fragmentado: Actualmente gestiona todo manualmente usando Google Drive, Excel (para la historia clínica y motivos de consulta), Word (para recetas) y Google Photos (para imágenes).
+
+Importancia del registro fotográfico: Las imágenes (antes/después, biopsias, tomografías) son vitales en su flujo de trabajo. Le resulta muy engorroso salir de la historia clínica en texto para ir a buscar las fotos; necesita ver la evolución cronológica intercalada con el texto en una sola pantalla.
+
+Respaldo físico: Suele imprimir las indicaciones y pedidos de laboratorio para que el paciente se los lleve, lo cual también le sirve como respaldo ante las bioquímicas y obras sociales.
+
+Inventario, Accesibilidad e Identidad Visual
+
+Control de Stock: Actualmente no lleva un registro formal del inventario. Repone los insumos a medida que se acaban visualmente y tiene problemas con las fechas de vencimiento cortas de los productos estéticos.
+
+Necesidad móvil y en la nube: Necesita acceder al sistema desde su celular en todo momento, especialmente cuando está en el hospital y le falla la conexión a internet.
+
+Trauma por pérdida de datos: Perdió todas sus historias clínicas con un sistema anterior ("Zenima Colón"), por lo que la seguridad y un respaldo confiable son sus mayores prioridades.
+
+Diseño UI/UX: Tiene una identidad visual definida que incluye un logo existente y prefiere una paleta de colores en tonos rosa pastel, dorado y un toque de negro.
+
+Consideraciones Estratégicas para el MVP
+Para cumplir con la meta de despliegue del MVP para el 10 de mayo, aprovechar la agilidad de un stack basado en JavaScript (como Next.js para el frontend y NestJS para el backend) te dará la ventaja de construir módulos rápidos, escalables y orientados a resolver los "puntos de dolor" más urgentes de la doctora:
+
+Enfoque Web Responsivo (Mobile-First): Ya que descartó una aplicación nativa de escritorio, el desarrollo web es el camino correcto. Asegúrate de que la interfaz en Next.js esté fuertemente optimizada para dispositivos móviles, dado que ella utilizará el sistema recurrentemente desde su teléfono, especialmente durante sus guardias.
+
+Módulo Visual Tracking (El Core del Producto): La característica que más valorará es la unificación del historial clínico con las imágenes. Tu base de datos y la interfaz deben permitir subir fotos directamente desde el celular durante la consulta y vincularlas a notas de texto específicas para crear una "línea de tiempo" de la evolución estética del paciente.
+
+Automatización de WhatsApp (Sin Autogestión): Aunque la doctora prohibió la reserva online por parte de los clientes, la integración con la API de WhatsApp es sumamente útil. Puedes configurar el sistema para que, una vez que ella asigne un turno manualmente, se dispare un recordatorio automático al paciente. Esto reduce el ausentismo y agiliza su comunicación diaria.
+
+Gestión de Inventario Basada en Alertas:
+El módulo de stock no necesita ser un ERP complejo en esta primera fase. Concéntrate en un CRUD simple donde pueda registrar el lote, la cantidad y la fecha de caducidad. Implementa notificaciones (visuales en el dashboard o vía email/WhatsApp) cuando un insumo esté por agotarse o vencer.
+
+Garantía de Respaldo Visible:
+Por su mala experiencia previa, el sistema no solo debe tener backups robustos en la nube, sino que la interfaz debería comunicárselo. Un pequeño indicador en pantalla que diga "Guardado automáticamente" o "Último respaldo hace 5 minutos" le generará mucha confianza en tu producto.
