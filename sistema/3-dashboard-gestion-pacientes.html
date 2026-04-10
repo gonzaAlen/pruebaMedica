@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de Pacientes — Dra. Nancy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rosa:#FFB6D9;--rosa-light:#FFD6EC;--rosa-pale:#FFF0F7;--rosa-mid:#F590C4;
+  --dorado:#D4AF37;--dorado-light:#E8D080;--dorado-pale:#FBF6E3;
+  --negro:#1A1A1A;--negro-mid:#2E2E2E;
+  --gris:#6B6B6B;--gris-light:#A8A8A8;--gris-bg:#F7F6F3;
+  --blanco:#FFFFFF;--crema:#FDFAF6;--borde:#F0EBE3;--borde-gris:#E8E4DF;
+  --mont:'Montserrat',sans-serif;--serif:'Cormorant Garamond',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;font-family:var(--mont);}
+body{display:flex;background:var(--gris-bg);}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:220px;min-height:100vh;
+  background:var(--negro);
+  display:flex;flex-direction:column;
+  padding:0;flex-shrink:0;
+  position:relative;overflow:hidden;
+}
+.sidebar::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:200px;
+  background:linear-gradient(to top,rgba(212,175,55,0.04),transparent);
+  pointer-events:none;
+}
+
+.sidebar-top{
+  padding:1.5rem 1.25rem 1.25rem;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  margin-bottom:0.5rem;
+}
+.sidebar-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--dorado);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mont);font-size:0.75rem;font-weight:600;
+  color:var(--negro);margin-bottom:0.75rem;
+  flex-shrink:0;
+}
+.sidebar-name{font-size:0.82rem;font-weight:600;color:var(--blanco);margin-bottom:0.15rem;}
+.sidebar-role{font-size:0.65rem;font-weight:300;color:rgba(255,255,255,0.35);letter-spacing:0.08em;}
+
+.nav-section{padding:0.5rem 0.75rem;flex:1;}
+.nav-item{
+  display:flex;align-items:center;gap:0.7rem;
+  padding:0.65rem 0.75rem;
+  border-radius:6px;
+  font-size:0.78rem;font-weight:400;
+  color:rgba(255,255,255,0.4);
+  text-decoration:none;cursor:pointer;
+  transition:background 0.2s,color 0.2s;
+  margin-bottom:2px;
+  user-select:none;
+}
+.nav-item:hover{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.7);}
+.nav-item.active{
+  background:rgba(212,175,55,0.12);
+  color:var(--dorado);font-weight:500;
+}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.nav-dot-gold{background:var(--dorado);}
+
+.sidebar-footer{
+  padding:1rem 1.25rem;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.sidebar-user{display:flex;align-items:center;gap:0.65rem;}
+.sidebar-user-avatar{
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.62rem;font-weight:500;color:rgba(255,255,255,0.4);
+}
+.sidebar-user-name{font-size:0.72rem;color:rgba(255,255,255,0.3);font-weight:300;}
+
+/* ── MAIN ── */
+.main{flex:1;display:flex;flex-direction:column;min-height:100vh;overflow:hidden;}
+
+.topbar{
+  background:var(--blanco);
+  border-bottom:1px solid var(--borde);
+  padding:1rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.topbar-left h1{font-size:1.35rem;font-weight:600;color:var(--negro);letter-spacing:-0.01em;}
+.topbar-left p{font-size:0.75rem;font-weight:300;color:var(--gris-light);margin-top:0.15rem;}
+
+.topbar-right{display:flex;align-items:center;gap:0.75rem;}
+
+.search-wrap{
+  position:relative;display:flex;align-items:center;
+}
+.search-wrap input{
+  padding:0.55rem 1rem 0.55rem 2.25rem;
+  border:1.5px solid var(--borde);background:var(--crema);
+  font-family:var(--mont);font-size:0.78rem;color:var(--negro);
+  border-radius:6px;outline:none;width:220px;
+  transition:border-color 0.2s;
+}
+.search-wrap input:focus{border-color:var(--dorado);}
+.search-wrap input::placeholder{color:var(--gris-light);}
+.search-icon{position:absolute;left:0.75rem;color:var(--gris-light);}
+
+.btn-new{
+  display:flex;align-items:center;gap:0.5rem;
+  background:var(--dorado);color:var(--negro);
+  border:none;border-radius:6px;
+  font-family:var(--mont);font-size:0.75rem;font-weight:600;
+  padding:0.6rem 1.1rem;cursor:pointer;
+  letter-spacing:0.04em;
+  transition:background 0.2s,transform 0.15s;
+  white-space:nowrap;
+}
+.btn-new:hover{background:var(--dorado-light);transform:translateY(-1px);}
+
+/* ── CONTENT ── */
+.content{padding:1.75rem 2rem;flex:1;overflow-y:auto;}
+
+/* Stats cards */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1rem;margin-bottom:1.75rem;
+}
+.stat-card{
+  background:var(--blanco);border:1px solid var(--borde);
+  border-radius:10px;padding:1.25rem 1.5rem;
+  transition:box-shadow 0.2s;
+}
+.stat-card:hover{box-shadow:0 4px 16px rgba(26,26,26,0.07);}
+.stat-num{
+  font-family:var(--mont);font-size:1.9rem;font-weight:300;
+  color:var(--negro);line-height:1;margin-bottom:0.35rem;
+}
+.stat-label{font-size:0.72rem;font-weight:400;color:var(--gris);margin-bottom:0.6rem;}
+.stat-badge{
+  display:inline-flex;align-items:center;
+  font-size:0.62rem;font-weight:600;
+  padding:0.2rem 0.55rem;border-radius:20px;
+  white-space:nowrap;
+}
+.badge-rosa{background:var(--rosa-pale);color:var(--rosa-mid);}
+.badge-dorado{background:var(--dorado-pale);color:#8a6f00;}
+.badge-verde{background:#edf7ed;color:#2e7d32;}
+
+/* Table card */
+.table-card{
+  background:var(--blanco);border:1px solid var(--borde);
+  border-radius:10px;overflow:hidden;margin-bottom:1.5rem;
+}
+
+.table-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 1.5rem;border-bottom:1px solid var(--borde);
+}
+.tab-group{display:flex;gap:0.5rem;}
+.tab{
+  padding:0.4rem 0.9rem;border-radius:20px;
+  font-size:0.72rem;font-weight:500;
+  cursor:pointer;transition:background 0.2s,color 0.2s;
+  border:1.5px solid transparent;
+}
+.tab.active-rosa{background:var(--rosa);color:var(--negro);border-color:var(--rosa);}
+.tab.active-dorado{background:var(--dorado-pale);color:#6b5200;border-color:var(--dorado-light);}
+.tab:not(.active-rosa):not(.active-dorado){background:var(--crema);color:var(--gris);border-color:var(--borde);}
+.tab:hover:not(.active-rosa):not(.active-dorado){background:var(--borde);}
+
+.sort-btn{
+  display:flex;align-items:center;gap:0.4rem;
+  font-size:0.72rem;color:var(--gris);
+  background:none;border:1.5px solid var(--borde);
+  border-radius:6px;padding:0.35rem 0.75rem;
+  cursor:pointer;font-family:var(--mont);
+  transition:border-color 0.2s;
+}
+.sort-btn:hover{border-color:var(--dorado);}
+
+table{width:100%;border-collapse:collapse;}
+thead tr{border-bottom:1px solid var(--borde);}
+thead th{
+  padding:0.75rem 1.5rem;
+  text-align:left;font-size:0.65rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gris-light);
+}
+tbody tr{
+  border-bottom:1px solid var(--borde);
+  transition:background 0.15s;cursor:pointer;
+}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:var(--crema);}
+td{padding:0.9rem 1.5rem;font-size:0.82rem;color:var(--negro-mid);}
+
+.patient-cell{display:flex;align-items:center;gap:0.75rem;}
+.patient-avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--rosa-pale);border:1.5px solid var(--rosa-light);
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.68rem;font-weight:600;color:var(--rosa-mid);
+  flex-shrink:0;
+}
+.patient-avatar.gray{background:#f0ede8;border-color:#ddd;color:var(--gris);}
+.patient-name{font-weight:500;color:var(--negro);font-size:0.85rem;display:block;margin-bottom:0.1rem;}
+.patient-sub{font-size:0.7rem;color:var(--gris-light);font-weight:300;}
+
+.tipo-badge{
+  display:inline-block;padding:0.22rem 0.65rem;
+  border-radius:20px;font-size:0.65rem;font-weight:600;
+  letter-spacing:0.04em;
+}
+.tipo-estetica{background:var(--rosa-pale);color:var(--rosa-mid);}
+.tipo-clinica{background:#eaf2fb;color:#1565c0;}
+
+.estado-badge{
+  display:inline-block;padding:0.22rem 0.65rem;
+  border-radius:20px;font-size:0.65rem;font-weight:500;
+}
+.estado-activa{background:#edf7ed;color:#2e7d32;}
+.estado-seguimiento{background:#fef3e2;color:#b45309;}
+.estado-hoy{background:var(--dorado-pale);color:#6b5200;font-weight:600;}
+
+.btn-ver{
+  padding:0.35rem 0.85rem;border:1.5px solid var(--borde);
+  background:transparent;border-radius:6px;
+  font-family:var(--mont);font-size:0.7rem;font-weight:500;
+  color:var(--negro-mid);cursor:pointer;
+  transition:border-color 0.2s,background 0.2s;
+}
+.btn-ver:hover{border-color:var(--dorado);background:var(--dorado-pale);}
+.btn-ver.highlight{
+  background:var(--dorado);border-color:var(--dorado);
+  color:var(--negro);font-weight:600;
+}
+.btn-ver.highlight:hover{background:var(--dorado-light);}
+
+/* ── SEARCH + FILTERS ── */
+.bottom-section{
+  background:var(--blanco);border:1px solid var(--borde);
+  border-radius:10px;overflow:hidden;
+}
+.bottom-search{
+  padding:0.85rem 1.25rem;border-bottom:1px solid var(--borde);
+  display:flex;align-items:center;gap:0.75rem;
+  color:var(--gris-light);
+}
+.bottom-search input{
+  flex:1;border:none;background:transparent;
+  font-family:var(--mont);font-size:0.82rem;color:var(--negro);
+  outline:none;
+}
+.bottom-search input::placeholder{color:var(--gris-light);}
+.filter-bar{
+  padding:0.75rem 1.25rem;
+  display:flex;gap:0.5rem;
+}
+.filter-btn{
+  display:flex;align-items:center;gap:0.4rem;
+  padding:0.35rem 0.9rem;border-radius:20px;
+  font-size:0.7rem;font-weight:500;
+  cursor:pointer;border:1.5px solid var(--borde);
+  background:transparent;color:var(--gris);
+  font-family:var(--mont);
+  transition:background 0.2s,border-color 0.2s,color 0.2s;
+}
+.filter-btn.active{background:var(--negro);border-color:var(--negro);color:var(--blanco);}
+.filter-btn:not(.active):hover{border-color:var(--gris);color:var(--negro);}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-top">
+    <div class="sidebar-avatar">DN</div>
+    <div class="sidebar-name">Dra. Nancy</div>
+    <div class="sidebar-role">Panel médico</div>
+  </div>
+
+  <nav class="nav-section">
+    <div class="nav-item active">
+      <span class="nav-dot nav-dot-gold"></span>
+      Pacientes
+    </div>
+    <div class="nav-item">
+      <span class="nav-dot"></span>
+      Turnos
+    </div>
+    <div class="nav-item">
+      <span class="nav-dot"></span>
+      Tratamientos
+    </div>
+    <div class="nav-item">
+      <span class="nav-dot"></span>
+      Galería
+    </div>
+    <div class="nav-item">
+      <span class="nav-dot"></span>
+      Estadísticas
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">A</div>
+      <span class="sidebar-user-name">Administrador</span>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1>Gestión de Pacientes</h1>
+      <p>Lunes 6 de abril, 2026</p>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Buscar paciente...">
+      </div>
+      <button class="btn-new" onclick="window.location.href='5-nueva-consulta.html'">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Nuevo paciente
+      </button>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">124</div>
+        <div class="stat-label">Total pacientes</div>
+        <span class="stat-badge badge-rosa">+8 este mes</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" style="color:var(--rosa-mid);">78</div>
+        <div class="stat-label">Pacientes estéticos</div>
+        <span class="stat-badge badge-rosa">63% del total</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">46</div>
+        <div class="stat-label">Pacientes clínicos</div>
+        <span class="stat-badge badge-dorado">37% del total</span>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Turnos hoy</div>
+        <span class="stat-badge badge-rosa">3 pendientes</span>
+      </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="table-card">
+      <div class="table-header">
+        <div class="tab-group">
+          <span class="tab active-rosa">Estéticos (78)</span>
+          <span class="tab active-dorado">Clínicos (46)</span>
+        </div>
+        <button class="sort-btn">
+          Última visita
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Paciente</th>
+            <th>Tipo</th>
+            <th>Último turno</th>
+            <th>Tratamiento</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr onclick="window.location.href='4-detalle-paciente.html'">
+            <td><div class="patient-cell"><div class="patient-avatar">MG</div><div><span class="patient-name">María González</span><span class="patient-sub">34 años · DNI 28.441.200</span></div></div></td>
+            <td><span class="tipo-badge tipo-estetica">Estética</span></td>
+            <td>02 abr 2026</td>
+            <td>Relleno de labios</td>
+            <td><span class="estado-badge estado-activa">Activa</span></td>
+            <td><button class="btn-ver" onclick="event.stopPropagation();window.location.href='4-detalle-paciente.html'">Ver ficha</button></td>
+          </tr>
+          <tr>
+            <td><div class="patient-cell"><div class="patient-avatar gray">LM</div><div><span class="patient-name">Luciana Martínez</span><span class="patient-sub">41 años · DNI 25.118.440</span></div></div></td>
+            <td><span class="tipo-badge tipo-clinica">Clínica</span></td>
+            <td>31 mar 2026</td>
+            <td>Control HTA</td>
+            <td><span class="estado-badge estado-seguimiento">Seguimiento</span></td>
+            <td><button class="btn-ver">Ver ficha</button></td>
+          </tr>
+          <tr>
+            <td><div class="patient-cell"><div class="patient-avatar gray">CP</div><div><span class="patient-name">Carolina Pérez</span><span class="patient-sub">52 años · DNI 18.772.110</span></div></div></td>
+            <td><span class="tipo-badge tipo-estetica">Estética</span></td>
+            <td>28 mar 2026</td>
+            <td>Lifting de cejas</td>
+            <td><span class="estado-badge estado-activa">Activa</span></td>
+            <td><button class="btn-ver">Ver ficha</button></td>
+          </tr>
+          <tr>
+            <td><div class="patient-cell"><div class="patient-avatar">AR</div><div><span class="patient-name">Ana Rodríguez</span><span class="patient-sub">29 años · DNI 32.905.788</span></div></div></td>
+            <td><span class="tipo-badge tipo-estetica">Estética</span></td>
+            <td>06 abr 2026</td>
+            <td>Botox preventivo</td>
+            <td><span class="estado-badge estado-hoy">Turno hoy</span></td>
+            <td><button class="btn-ver highlight" onclick="event.stopPropagation();window.location.href='4-detalle-paciente.html'">Ver ficha</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Search + filters -->
+    <div class="bottom-section">
+      <div class="bottom-search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Buscar paciente por nombre...">
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+          Todos
+        </button>
+        <button class="filter-btn">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Estética
+        </button>
+        <button class="filter-btn">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+          Clínica
+        </button>
+        <button class="filter-btn">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Activos
+        </button>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</body>
+</html>
