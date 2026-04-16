@@ -301,6 +301,7 @@ body.dashboard-page{background:var(--gris-bg);}
 .table-card{
   background:var(--blanco);border:1px solid var(--borde);
   border-radius:10px;overflow:hidden;margin-bottom:1.5rem;
+  display: flex; flex-direction: column; min-height: 640px;
 }
 
 .table-header{
@@ -342,7 +343,10 @@ tbody tr{
   transition:background 0.15s;cursor:pointer;
 }
 tbody tr:last-child{border-bottom:none;}
-tbody tr:hover{background:var(--crema);}
+tbody tr:hover, .patient-row:hover{background:var(--crema);}
+.patient-row:focus{outline: 2px solid var(--dorado); background: var(--crema);}
+.highlight-row { background-color: #FFF9C4 !important; }
+.highlight-row:hover { background-color: #FFF176 !important; }
 td{padding:0.9rem 1.5rem;font-size:0.82rem;color:var(--negro-mid);}
 
 .patient-cell{display:flex;align-items:center;gap:0.75rem;}
@@ -364,6 +368,7 @@ td{padding:0.9rem 1.5rem;font-size:0.82rem;color:var(--negro-mid);}
 }
 .tipo-estetica{background:var(--rosa-pale);color:var(--rosa-mid);}
 .tipo-clinica{background:#eaf2fb;color:#1565c0;}
+.tipo-ambas{background:var(--negro);color:var(--blanco);border:1px solid var(--dorado);}
 
 .estado-badge{
   display:inline-block;padding:0.22rem 0.65rem;
@@ -390,7 +395,9 @@ td{padding:0.9rem 1.5rem;font-size:0.82rem;color:var(--negro-mid);}
 .bottom-section{
   background:var(--blanco);border:1px solid var(--borde);
   border-radius:10px;overflow:hidden;
+  margin-bottom:1rem;
 }
+
 .bottom-search{
   padding:0.85rem 1.25rem;border-bottom:1px solid var(--borde);
   display:flex;align-items:center;gap:0.75rem;
@@ -417,6 +424,42 @@ td{padding:0.9rem 1.5rem;font-size:0.82rem;color:var(--negro-mid);}
 }
 .filter-btn.active{background:var(--negro);border-color:var(--negro);color:var(--blanco);}
 .filter-btn:not(.active):hover{border-color:var(--gris);color:var(--negro);}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border-top: 1px solid var(--borde);
+  margin-top: auto;
+}
+.pagination-container button {
+  min-width: 36px;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--borde);
+  background: var(--blanco);
+  color: var(--negro-mid);
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: var(--mont);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.pagination-container button:hover:not(:disabled) {
+  border-color: var(--dorado);
+  background: var(--dorado-pale);
+}
+.pagination-container button.active {
+  background: var(--dorado);
+  color: var(--negro);
+  border-color: var(--dorado);
+  font-weight: 600;
+}
+.pagination-container button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
 /* ── PATIENT VIEW ── */
 body.patient-page{background:var(--gris-bg);}

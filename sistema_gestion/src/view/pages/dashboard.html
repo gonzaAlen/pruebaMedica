@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/sistema_gestion/css/estilos.css">
+  <script src="../../../js/dashboard.js" defer></script>
 </head>
 <body class="dashboard-page">
 
@@ -19,7 +20,7 @@
     </div>
 
     <nav class="nav-section">
-      <div class="nav-item active">
+      <div class="nav-item" >
         <span class="nav-dot nav-dot-gold"></span>
         Pacientes
       </div>
@@ -52,14 +53,10 @@
   <main class="main">
     <div class="topbar">
       <div class="topbar-left">
-        <h1>Gestión de Pacientes</h1>
+        <h1>Inicio</h1>
         <p>Lunes 6 de abril, 2026</p>
       </div>
       <div class="topbar-right">
-        <div class="search-wrap">
-          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Buscar paciente...">
-        </div>
         <button class="btn-new" onclick="window.location.href='nueva-consulta.html'">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Nuevo paciente
@@ -68,6 +65,39 @@
     </div>
 
     <div class="content">
+      <div class="bottom-section">
+        <div class="bottom-search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="searchInput" placeholder="Buscar paciente por nombre...">
+        </div>
+        <div class="filter-bar">
+          <button class="filter-btn active">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            Todos
+          </button>
+          <button class="filter-btn">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Estética
+          </button>
+          <button class="filter-btn">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            Clínica
+          </button>
+          <button class="filter-btn">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Activos
+          </button>
+          <button class="filter-btn">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Turno hoy
+          </button>
+          <button class="filter-btn">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+            Seguimiento
+          </button>
+        </div>
+      </div>
+
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-num">124</div>
@@ -97,10 +127,6 @@
             <span class="tab active-rosa">Estéticos (78)</span>
             <span class="tab active-dorado">Clínicos (46)</span>
           </div>
-          <button class="sort-btn">
-            Última visita
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
         </div>
 
         <table>
@@ -114,66 +140,11 @@
               <th>Acción</th>
             </tr>
           </thead>
-          <tbody>
-            <tr onclick="window.location.href='detalle-paciente.html'">
-              <td><div class="patient-cell"><div class="patient-avatar">MG</div><div><span class="patient-name">María González</span><span class="patient-sub">34 años · DNI 28.441.200</span></div></div></td>
-              <td><span class="tipo-badge tipo-estetica">Estética</span></td>
-              <td>02 abr 2026</td>
-              <td>Relleno de labios</td>
-              <td><span class="estado-badge estado-activa">Activa</span></td>
-              <td><button class="btn-ver" onclick="event.stopPropagation();window.location.href='detalle-paciente.html'">Ver ficha</button></td>
-            </tr>
-            <tr>
-              <td><div class="patient-cell"><div class="patient-avatar gray">LM</div><div><span class="patient-name">Luciana Martínez</span><span class="patient-sub">41 años · DNI 25.118.440</span></div></div></td>
-              <td><span class="tipo-badge tipo-clinica">Clínica</span></td>
-              <td>31 mar 2026</td>
-              <td>Control HTA</td>
-              <td><span class="estado-badge estado-seguimiento">Seguimiento</span></td>
-              <td><button class="btn-ver">Ver ficha</button></td>
-            </tr>
-            <tr>
-              <td><div class="patient-cell"><div class="patient-avatar gray">CP</div><div><span class="patient-name">Carolina Pérez</span><span class="patient-sub">52 años · DNI 18.772.110</span></div></div></td>
-              <td><span class="tipo-badge tipo-estetica">Estética</span></td>
-              <td>28 mar 2026</td>
-              <td>Lifting de cejas</td>
-              <td><span class="estado-badge estado-activa">Activa</span></td>
-              <td><button class="btn-ver">Ver ficha</button></td>
-            </tr>
-            <tr>
-              <td><div class="patient-cell"><div class="patient-avatar">AR</div><div><span class="patient-name">Ana Rodríguez</span><span class="patient-sub">29 años · DNI 32.905.788</span></div></div></td>
-              <td><span class="tipo-badge tipo-estetica">Estética</span></td>
-              <td>06 abr 2026</td>
-              <td>Botox preventivo</td>
-              <td><span class="estado-badge estado-hoy">Turno hoy</span></td>
-              <td><button class="btn-ver highlight" onclick="event.stopPropagation();window.location.href='detalle-paciente.html'">Ver ficha</button></td>
-            </tr>
+          <tbody id="patientTableBody">
+            <!-- Renderizado dinámico vía dashboard.js -->
           </tbody>
         </table>
-      </div>
-
-      <div class="bottom-section">
-        <div class="bottom-search">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Buscar paciente por nombre...">
-        </div>
-        <div class="filter-bar">
-          <button class="filter-btn active">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-            Todos
-          </button>
-          <button class="filter-btn">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Estética
-          </button>
-          <button class="filter-btn">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
-            Clínica
-          </button>
-          <button class="filter-btn">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            Activos
-          </button>
-        </div>
+        <div id="pagination" class="pagination-container"></div>
       </div>
     </div>
   </main>
