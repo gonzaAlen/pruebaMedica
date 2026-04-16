@@ -734,6 +734,7 @@ body.consulta-page{background:var(--gris-bg);}
 .photo-thumb-inner{
   width:100%;height:100%;
   display:flex;align-items:center;justify-content:center;
+  position:relative;
 }
 
 .form-actions{
@@ -777,3 +778,39 @@ body.consulta-page{background:var(--gris-bg);}
   display:flex;align-items:center;gap:0.6rem;
 }
 .card-title-icon{color:var(--dorado);}
+
+/* ── INPUT FILE OCULTO ── */
+#fileInput{display:none;}
+.upload-hint{font-size:0.72rem;color:var(--gris-light);}
+.photo-remove-btn{
+  position:absolute;top:3px;right:3px;
+  background:rgba(0,0,0,0.5);border:none;border-radius:50%;
+  width:18px;height:18px;color:#fff;cursor:pointer;
+  font-size:10px;display:flex;align-items:center;justify-content:center;
+}
+
+/* ── FORMULARIO DINÁMICO POR TIPO ── */
+.fields-clinica,.fields-estetica{display:none;}
+.fields-clinica.active,.fields-estetica.active{display:contents;}
+
+/* ── BOTÓN PDF ── */
+.btn-pdf{
+  padding:0.7rem 1.4rem;
+  background:transparent;
+  border:1.5px solid var(--dorado);
+  border-radius:7px;
+  font-family:var(--mont);font-size:0.78rem;font-weight:500;
+  color:var(--dorado);cursor:pointer;
+  display:flex;align-items:center;gap:0.4rem;
+  transition:background 0.2s,color 0.2s;
+}
+.btn-pdf:hover{background:var(--dorado);color:var(--negro);}
+
+/* ── IMPRESIÓN / GENERACIÓN PDF ── */
+@media print{
+  .consulta-topbar,.patient-chip,.tipo-grid,
+  .form-card:has(.upload-zone),.form-actions{display:none !important;}
+  .consulta-content{padding:0;}
+  .form-card{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+  .form-field textarea,.form-field input{border:none !important;background:transparent !important;resize:none;}
+}
